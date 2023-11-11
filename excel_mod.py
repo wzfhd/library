@@ -2,6 +2,7 @@
 
 import os
 import pandas as pd
+from openpyxl import Workbook
 
 def get_file_names(directory_path):
     files = os.listdir(directory_path)
@@ -20,6 +21,11 @@ def write_data_to_excel(data, excel_file_path):
     df.to_excel(excel_file_path, index=False)
     print("数据已成功写入Excel文件！")
 
+def hex_to_decimal(hex_num):
+    decimal_num = int(hex_num, 16)
+    return decimal_num
+
+
 # 测试示例
 
 excel_file_path = 'G:/test.xlsx'  # 指定要保存的Excel文件路径
@@ -32,14 +38,51 @@ directory_path = 'G:/code/library/excel_data'
 file_full_name , t = get_file_names(directory_path)
 
 # 2. get data of every temperature
-data_matrix = [[""] * 3 for _ in range(len(t))]
+# temperature|low hex|high hex|dec|tmp
+data_matrix = [[""] * 5 for _ in range(len(t))]
 #for name in file_full_name:
-for i in range(5):
+for i in range(len(t)):
     name = file_full_name[i]
     full_dir = directory_path + '/' + name
     data_matrix[i][0] = t[i]
     data_matrix[i][1] , data_matrix[i][2] = read_excel_file(full_dir)
+
+    #print(type(data_matrix[i][3]))
+
+    sum_dec = hex_to_decimal(data_matrix[i][1]) + (hex_to_decimal(data_matrix[i][2])*(2**8))
+
+    if sum_dec <= 2**15-1:
+        data_matrix[i][3] = sum_dec
+    else:
+        data_matrix[i][3] = sum_dec - 2**16
+
+    data_matrix[i][4] = data_matrix[i][3]*0.00278 - 12
+    #data_matrix[i][5] = sum_dec
     #print(data)
 
+print(data_matrix)
 # 3. write data to excel
-write_data_to_excel(data_matrix, excel_file_path)
+# 创建一个新的工作簿
+workbook = Workbook()
+
+# 选择默认的活动工作表
+worksheet = workbook.active
+
+# 添加表头
+headers = ['reat T', 'low hex', 'high hex' , 'dec' , 'test T']
+worksheet.append(headers)
+
+for row in data_matrix:
+    worksheet.append(row)
+
+# 保存工作簿
+workbook.save(excel_file_path)
+
+
+#write_data_to_excel(data_matrix, excel_file_path)
+
+
+
+
+
+
