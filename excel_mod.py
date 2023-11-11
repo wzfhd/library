@@ -25,14 +25,31 @@ def hex_to_decimal(hex_num):
     decimal_num = int(hex_num, 16)
     return decimal_num
 
+def write_data_to_excel_with_name(data_matrix, excel_file_path):
+    # 创建一个新的工作簿
+    workbook = Workbook()
+
+    # 选择默认的活动工作表
+    worksheet = workbook.active
+
+    # 添加表头
+    headers = ['reat T', 'low hex', 'high hex', 'dec', 'test T']
+    worksheet.append(headers)
+
+    # 写入数据
+    for row in data_matrix:
+        worksheet.append(row)
+
+    # 保存工作簿
+    workbook.save(excel_file_path)
+
+
+
 
 # 测试示例
 
 excel_file_path = 'G:/test.xlsx'  # 指定要保存的Excel文件路径
-
 directory_path = 'G:/code/library/excel_data'
-
-#write_data_to_excel(data, excel_file_path)
 
 # 1. get file name and temperature
 file_full_name , t = get_file_names(directory_path)
@@ -47,8 +64,6 @@ for i in range(len(t)):
     data_matrix[i][0] = t[i]
     data_matrix[i][1] , data_matrix[i][2] = read_excel_file(full_dir)
 
-    #print(type(data_matrix[i][3]))
-
     sum_dec = hex_to_decimal(data_matrix[i][1]) + (hex_to_decimal(data_matrix[i][2])*(2**8))
 
     if sum_dec <= 2**15-1:
@@ -57,32 +72,7 @@ for i in range(len(t)):
         data_matrix[i][3] = sum_dec - 2**16
 
     data_matrix[i][4] = data_matrix[i][3]*0.00278 - 12
-    #data_matrix[i][5] = sum_dec
-    #print(data)
 
 print(data_matrix)
 # 3. write data to excel
-# 创建一个新的工作簿
-workbook = Workbook()
-
-# 选择默认的活动工作表
-worksheet = workbook.active
-
-# 添加表头
-headers = ['reat T', 'low hex', 'high hex' , 'dec' , 'test T']
-worksheet.append(headers)
-
-for row in data_matrix:
-    worksheet.append(row)
-
-# 保存工作簿
-workbook.save(excel_file_path)
-
-
-#write_data_to_excel(data_matrix, excel_file_path)
-
-
-
-
-
-
+write_data_to_excel_with_name(data_matrix, excel_file_path)
