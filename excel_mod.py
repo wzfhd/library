@@ -3,6 +3,14 @@
 import os
 import pandas as pd
 from openpyxl import Workbook
+import matplotlib.pyplot as plt
+
+def plot_data(x, y):
+    plt.plot(x, y)
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Plot')
+    plt.savefig('plot.png')
 
 def get_file_names(directory_path):
     files = os.listdir(directory_path)
@@ -28,26 +36,19 @@ def hex_to_decimal(hex_num):
 def write_data_to_excel_with_name(data_matrix, excel_file_path):
     # 创建一个新的工作簿
     workbook = Workbook()
-
     # 选择默认的活动工作表
     worksheet = workbook.active
-
     # 添加表头
     headers = ['reat T', 'low hex', 'high hex', 'dec', 'test T']
     worksheet.append(headers)
-
     # 写入数据
     for row in data_matrix:
         worksheet.append(row)
-
     # 保存工作簿
     workbook.save(excel_file_path)
 
-
-
-
+###################################################################
 # 测试示例
-
 excel_file_path = 'G:/test.xlsx'  # 指定要保存的Excel文件路径
 directory_path = 'G:/code/library/excel_data'
 
@@ -76,3 +77,9 @@ for i in range(len(t)):
 print(data_matrix)
 # 3. write data to excel
 write_data_to_excel_with_name(data_matrix, excel_file_path)
+
+
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+
+plot_data(x, y)
