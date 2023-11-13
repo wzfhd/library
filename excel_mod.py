@@ -98,7 +98,7 @@ file_full_name , t = get_file_names(directory_path)
 # 2. get data of every temperature
 # temperature|low hex|high hex|dec|tmp
 data_matrix = [[""] * 5 for _ in range(len(t))]
-target_character = '(1)'
+target_character = '(2)'
 #for name in file_full_name:
 for i in range(len(t)):
     name = file_full_name[i]
