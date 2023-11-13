@@ -57,8 +57,8 @@ def write_data_to_excel_with_name(data_matrix, excel_file_path):
 
 ###################################################################
 # 测试示例
-excel_file_path = 'C:/Users/huadi/JINSHAN/mcu/rtc/扫温测试/dfi_TEMP_1109/1/test.xlsx'  # 指定要保存的Excel文件路径
-directory_path = 'C:/Users/huadi/JINSHAN/mcu/rtc/扫温测试/dfi_TEMP_1109/1'
+excel_file_path = 'C:/Users/huadi/JINSHAN/mcu/rtc/扫温测试/dfi_TEMP_1109/2/test.xlsx'  # 指定要保存的Excel文件路径
+directory_path = 'C:/Users/huadi/JINSHAN/mcu/rtc/扫温测试/dfi_TEMP_1109/2'
 
 # 1. get file name and temperature
 file_full_name , t = get_file_names(directory_path)
