@@ -1,22 +1,29 @@
-import matplotlib.pyplot as plt
 import numpy as np
-from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt
 
-def func(x, a, b, c):
-  return b * np.power(a, x) + c
+# 生成一些样本数据
+x = np.array([0.284786087,0.12945381,-0.074728547,-0.256955812,-0.399115034])
+y = np.array([-8206.226946,-2289.993967,293.8983481,-3127.71489,-10068.41365])
 
-if __name__ == "__main__":
-  x = [1 , 2]
-  y = [3 , 4]
+# 进行多项式拟合，这里使用3次多项式（可以根据需求调整次数）
+coefficients = np.polyfit(x, y, 4)
 
-  popt, pcov = curve_fit(func, x, y)                # 曲线拟合，popt为函数的参数list
-  y_pred = [func(i, popt[0], popt[1], popt[2]) for i in x]    # 直接用函数和函数参数list来进行y值的计算
-  print(popt)
+# 生成拟合曲线的函数
+fit_function = np.poly1d(coefficients)
 
-  plot1 = plt.plot(x, y, '*', label='original values')
-  plot2 = plt.plot(x, y_pred, 'r', label='fit values')
-  plt.title('')
-  plt.xlabel('')
-  plt.ylabel('')
-  plt.legend(loc=3, borderaxespad=0., bbox_to_anchor=(0, 0))
-  plt.show()
+# 生成拟合后的y值
+y_fit = fit_function(x)
+
+# 打印拟合的多项式系数
+print("拟合多项式系数:", coefficients)
+
+# 绘制原始数据和拟合曲线
+plt.scatter(x, y, label='orignal')
+plt.plot(x, y_fit, label='fit', color='red')
+plt.legend()
+plt.show()
+
+# 打印拟合多项式的每个系数
+print("fit coef:")
+for i, coef in enumerate(coefficients):
+    print(f"coef {len(coefficients) - i - 1}: {coef}")
