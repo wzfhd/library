@@ -1,6 +1,6 @@
 from openpyxl import Workbook
 
-file_path = 'C:/Users/huadi/JINSHAN/mcu/emu外包/竞品测试/EMU测试3/I1_2.5ms_1212.log'
+file_path = 'G:/code/library/data_mod/I2_2p5ms_1212.txt'
 
 def write_data_to_excel_with_name(data_matrix, excel_file_path,headers):
     # 创建一个新的工作簿
@@ -55,67 +55,73 @@ index8 = 0
 with open(file_path, "r") as file:
     lines = file.readlines()
     for line in lines:
-        if line[0:1] == 'B1':
-            d = int(line[len(line)-5:len(line)], 16)
+        #print(line)
+        print(line[0:2])
+        print(line[len(line)-6:len(line)-1])
+        if line[0:2] == ['B1']:
+            d = int(line[len(line)-6:len(line)-1], 16)
+            print(d)
+
             FastRMSI1.append(d)
-        elif line[0:1] == 'B2':
-            d = int(line[len(line)-5:len(line)], 16)
+        elif line[0:2] == 'B2':
+            d = int(line[len(line)-6:len(line)-1], 16)
             FastRMSI2.append(d)
-        elif line[0:1] == 'B3':
-            d = int(line[len(line)-5:len(line)], 16)
+        elif line[0:2] == 'B3':
+            d = int(line[len(line)-6:len(line)-1], 16)
             FastRMSU.append(d)
-        elif line[0:1] == 'B4':
-            d = int(line[len(line)-5:len(line)], 16)
+        elif line[0:2] == 'B4':
+            d = int(line[len(line)-6:len(line)-1], 16)
             RMSI1.append(d)
-        elif line[0:1] == 'B5':
-            d = int(line[len(line)-5:len(line)], 16)
+        elif line[0:2] == 'B5':
+            d = int(line[len(line)-6:len(line)-1], 16)
             RMSI2.append(d)
-        elif line[0:1] == 'B6':
-            d = int(line[len(line)-5:len(line)], 16)
+        elif line[0:2] == 'B6':
+            d = int(line[len(line)-6:len(line)-1], 16)
             RMSU.append(d)
-        elif line[0:1] == 'C0':
-            d = int(line[len(line)-3:len(line)], 16)
+        elif line[0:2] == 'C0':
+            d = int(line[len(line)-4:len(line)-1], 16)
             f = 819200/(d*2)
             FreqU.append()
-        elif line[0:1] == 'D1':
+        elif line[0:2] == 'D1':
             d = int(line[len(line)-7:len(line)], 16)
             FastP1.append(d)
-        elif line[0:1] == 'D2':
+        elif line[0:2] == 'D2':
             d = int(line[len(line)-7:len(line)], 16)
             FastQ1.append(d)
-        elif line[0:1] == 'D3':
+        elif line[0:2] == 'D3':
             d = int(line[len(line)-7:len(line)], 16)
             FastP2.append(d)
-        elif line[0:1] == 'D4':
+        elif line[0:2] == 'D4':
             d = int(line[len(line)-7:len(line)], 16)
             FastQ2.append(d)
-        elif line[0:1] == 'D5':
+        elif line[0:2] == 'D5':
             d = int(line[len(line)-7:len(line)], 16)
             FastS1.append(d)
-        elif line[0:1] == 'D6':
+        elif line[0:2] == 'D6':
             d = int(line[len(line)-7:len(line)], 16)
             FastS2.append(d)
-        elif line[0:1] == 'E1':
+        elif line[0:2] == 'E1':
             d = int(line[len(line)-7:len(line)], 16)
             P1.append(d)
-        elif line[0:1] == 'E2':
+        elif line[0:2] == 'E2':
             d = int(line[len(line)-7:len(line)], 16)
             Q1.append(d)
-        elif line[0:1] == 'E3':
+        elif line[0:2] == 'E3':
             d = int(line[len(line)-7:len(line)], 16)
             P2.append(d)
-        elif line[0:1] == 'E4':
+        elif line[0:2] == 'E4':
             d = int(line[len(line)-7:len(line)], 16)
             Q2.append(d)
-        elif line[0:1] == 'E5':
+        elif line[0:2] == 'E5':
             d = int(line[len(line)-7:len(line)], 16)
             S1.append(d)
-        elif line[0:1] == 'E6':
+        elif line[0:2] == 'E6':
             d = int(line[len(line)-7:len(line)], 16)
             S2.append(d)
 
         # Process each line
 
+"""
 
 excel_file_path = 'C:/Users/huadi/JINSHAN/mcu/emu外包/竞品测试/EMU测试3/FastRMSU.xlsx'
 headers = ['FastRMSU']
@@ -194,4 +200,6 @@ write_data_to_excel_with_name(S2, excel_file_path,headers)
 excel_file_path = 'C:/Users/huadi/JINSHAN/mcu/emu外包/竞品测试/EMU测试3/FreqU.xlsx'
 headers = ['FreqU']
 write_data_to_excel_with_name(FreqU, excel_file_path,headers)
+"""
+
 
