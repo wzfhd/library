@@ -76,8 +76,8 @@ def write_data_to_excel_with_name(data_matrix, excel_file_path):
 
 
 # 指定文件地址
-file_path = 'C:/Users/Windows11/Desktop/0input.txt'
-excel_file_path = 'C:/Users/Windows11/Desktop/0input.xlsx'
+file_path = 'C:/Users/huadi/JINSHAN/MCU/emu外包/竞品测试/模拟测试数据/spl_011.txt'
+excel_file_path = 'C:/Users/huadi/JINSHAN/MCU/emu外包/竞品测试/模拟测试数据/spl_011.xlsx'
 
 # 打开文件并读取内容
 with open(file_path, 'r') as file:
@@ -100,12 +100,13 @@ stop = len(index) - 2
 t = list(range(start, stop))
 
 data =  []
-data_len = 6
+data_len = 4
 
 for i in range(start, stop):
     data.append(Rbuffer[index[i]+9:index[i]+9+data_len])
     data.append(Rbuffer[index[i]+9+data_len+4:index[i]+9+data_len+4+data_len])
     data.append(Rbuffer[index[i]+9+data_len+4+data_len+4:index[i]+9+data_len+4+data_len+4+data_len])
+    data.append(Rbuffer[index[i]+9+data_len+4+data_len+4+data_len+4:index[i]+9+data_len+4+data_len+4+data_len+4+data_len])
 
 print(data)
 
@@ -113,25 +114,23 @@ print(data)
 data_dec =  []
 
 for i in range(len(data)):
-    d0 = sign_re(data[i][data_len-2:data_len-1])
-    d1 = h2d(data[i][2:3])
-    d2 = h2d(data[i][0:1])
-    d = d0*2**16 + d1*2**8 + d2
-    if d>2**23:
-        d = d - 2**23
-    else:
+    d0 = sign_re(data[i][2])
+    d1 = h2d(data[i][3])
+    d2 = h2d(data[i][0])
+    d3 = h2d(data[i][1])
+    print(data[i][2])
+    d = d0*2**12 + d1*2**8 + d2*2**4 + d3
+    if d<=2**13-1:
         d = d
-    data_dec.append(d/2**22)
-
-print(data_dec)
+    else:
+        d = d - 2**14
+    data_dec.append(d/2**13)
 
 my_vector = np.array(data_dec)
 
-print(my_vector)
 
 data_dec0 = my_vector.reshape(-1, 1)
 
-print(data_dec0)
 
 data_dec1 = data_dec0.tolist()
 
