@@ -1,6 +1,7 @@
 from openpyxl import Workbook
+import numpy as np
 
-file_path = 'G:/code/library/data_mod/I2_2p5ms_1212.txt'
+file_path = 'C:/Users/huadi/JINSHAN/MCU/emu外包/竞品测试/U_500mV_I1_400mV_3.7ms.log'
 
 def write_data_to_excel_with_name(data_matrix, excel_file_path,headers):
     # 创建一个新的工作簿
@@ -57,71 +58,173 @@ with open(file_path, "r") as file:
     for line in lines:
         #print(line)
         print(line[0:2])
-        print(line[len(line)-6:len(line)-1])
-        if line[0:2] == ['B1']:
-            d = int(line[len(line)-6:len(line)-1], 16)
-            print(d)
+        #print(line[len(line)-9:len(line)-1])
 
+        if line[0:2] == 'B1':
+            d = int(line[len(line)-7:len(line)-1], 16)
+            #print(line[len(line)-6:len(line)-1])
             FastRMSI1.append(d)
         elif line[0:2] == 'B2':
-            d = int(line[len(line)-6:len(line)-1], 16)
+            d = int(line[len(line)-7:len(line)-1], 16)
             FastRMSI2.append(d)
         elif line[0:2] == 'B3':
-            d = int(line[len(line)-6:len(line)-1], 16)
+            d = int(line[len(line)-7:len(line)-1], 16)
             FastRMSU.append(d)
         elif line[0:2] == 'B4':
-            d = int(line[len(line)-6:len(line)-1], 16)
+            d = int(line[len(line)-7:len(line)-1], 16)
             RMSI1.append(d)
         elif line[0:2] == 'B5':
-            d = int(line[len(line)-6:len(line)-1], 16)
+            d = int(line[len(line)-7:len(line)-1], 16)
             RMSI2.append(d)
         elif line[0:2] == 'B6':
-            d = int(line[len(line)-6:len(line)-1], 16)
+            d = int(line[len(line)-7:len(line)-1], 16)
             RMSU.append(d)
         elif line[0:2] == 'C0':
-            d = int(line[len(line)-4:len(line)-1], 16)
+            d = int(line[len(line)-5:len(line)-1], 16)
             f = 819200/(d*2)
-            FreqU.append()
+            FreqU.append(f)
         elif line[0:2] == 'D1':
-            d = int(line[len(line)-7:len(line)], 16)
-            FastP1.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            FastP1.append(f)
         elif line[0:2] == 'D2':
-            d = int(line[len(line)-7:len(line)], 16)
-            FastQ1.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            FastQ1.append(f)
         elif line[0:2] == 'D3':
-            d = int(line[len(line)-7:len(line)], 16)
-            FastP2.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            FastP2.append(f)
         elif line[0:2] == 'D4':
-            d = int(line[len(line)-7:len(line)], 16)
-            FastQ2.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            FastQ2.append(f)
         elif line[0:2] == 'D5':
-            d = int(line[len(line)-7:len(line)], 16)
-            FastS1.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            FastS1.append(f)
         elif line[0:2] == 'D6':
-            d = int(line[len(line)-7:len(line)], 16)
-            FastS2.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            FastS2.append(f)
         elif line[0:2] == 'E1':
-            d = int(line[len(line)-7:len(line)], 16)
-            P1.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            P1.append(f)
         elif line[0:2] == 'E2':
-            d = int(line[len(line)-7:len(line)], 16)
-            Q1.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            Q1.append(f)
         elif line[0:2] == 'E3':
-            d = int(line[len(line)-7:len(line)], 16)
-            P2.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            P2.append(f)
         elif line[0:2] == 'E4':
-            d = int(line[len(line)-7:len(line)], 16)
-            Q2.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            Q2.append(f)
         elif line[0:2] == 'E5':
-            d = int(line[len(line)-7:len(line)], 16)
-            S1.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            S1.append(f)
         elif line[0:2] == 'E6':
-            d = int(line[len(line)-7:len(line)], 16)
-            S2.append(d)
+            d = int(line[len(line)-9:len(line)], 16)
+            if d>=2**31:
+                f = d - 2**32
+            else:
+                f = d
+            S2.append(f)
+
 
         # Process each line
+result = []
+result.append(sum(FastRMSI1)/len(FastRMSI1))
+result.append(sum(FastRMSI2)/len(FastRMSI2))
+result.append(sum(FastRMSU)/len(FastRMSU))
+result.append(sum(RMSI1)/len(RMSI1))
+result.append(sum(RMSI2)/len(RMSI2))
 
-"""
+result.append(sum(RMSU)/len(RMSU))
+result.append(sum(FreqU)/len(FreqU))
+result.append(sum(FastP1)/len(FastP1))
+result.append(sum(FastQ1)/len(FastQ1))
+result.append(sum(FastP2)/len(FastP2))
+
+result.append(sum(FastQ2)/len(FastQ2))
+result.append(sum(FastS1)/len(FastS1))
+result.append(sum(FastS2)/len(FastS2))
+result.append(sum(P1)/len(P1))
+result.append(sum(Q1)/len(Q1))
+
+result.append(sum(P2)/len(P2))
+result.append(sum(Q2)/len(Q2))
+result.append(sum(S1)/len(S1))
+result.append(sum(S2)/len(S2))
+print(result[2])
+
+re = np.zeros((1,19))
+for i in range(19):
+    re[0,i] = result[i]
+print(re)
+
+FastRMSI1.append(sum(FastRMSI1)/len(FastRMSI1))
+FastRMSI2.append(sum(FastRMSI2)/len(FastRMSI2))
+FastRMSU.append(sum(FastRMSU)/len(FastRMSU))
+RMSI1.append(sum(RMSI1)/len(RMSI1))
+RMSI2.append(sum(RMSI2)/len(RMSI2))
+RMSU.append(sum(RMSU)/len(RMSU))
+FreqU.append(sum(FreqU)/len(FreqU))
+FastP1.append(sum(FastP1)/len(FastP1))
+FastQ1.append(sum(FastQ1)/len(FastQ1))
+FastP2.append(sum(FastP2)/len(FastP2))
+FastQ2.append(sum(FastQ2)/len(FastQ2))
+FastS1.append(sum(FastS1)/len(FastS1))
+FastS2.append(sum(FastS2)/len(FastS2))
+P1.append(sum(P1)/len(P1))
+Q1.append(sum(Q1)/len(Q1))
+P2.append(sum(P2)/len(P2))
+Q2.append(sum(Q2)/len(Q2))
+S1.append(sum(S1)/len(S1))
+S2.append(sum(S2)/len(S2))
+
+
+
+
+
+
 
 excel_file_path = 'C:/Users/huadi/JINSHAN/mcu/emu外包/竞品测试/EMU测试3/FastRMSU.xlsx'
 headers = ['FastRMSU']
@@ -200,6 +303,8 @@ write_data_to_excel_with_name(S2, excel_file_path,headers)
 excel_file_path = 'C:/Users/huadi/JINSHAN/mcu/emu外包/竞品测试/EMU测试3/FreqU.xlsx'
 headers = ['FreqU']
 write_data_to_excel_with_name(FreqU, excel_file_path,headers)
-"""
 
 
+excel_file_path = 'C:/Users/huadi/JINSHAN/mcu/emu外包/竞品测试/EMU测试3/test.xlsx'
+headers = ['FastRMSI1','FastRMSI2','FastRMSU','RMSI1','RMSI2','RMSU','FreqU','FastP1','FastQ1','FastP2','FastQ2','FastS1','FastS2','P1','Q1','P2','Q2','S1','S2']
+write_data_to_excel_with_name(result, excel_file_path,headers)

@@ -27,9 +27,9 @@ def classify_files_by_keyword(source_folder, destination_folder_1, destination_f
 
 if __name__ == "__main__":
     # 替换为你的源文件夹路径、目标文件夹1路径、目标文件夹2路径和关键字
-    source_folder = 'C:/Users/huadi/JINSHAN/MCU/RTC/扫温测试/dfi_TEMP_1109'
-    destination_folder_1 = 'C:/Users/huadi/JINSHAN/MCU/RTC/扫温测试/dfi_TEMP_1109/1'
-    destination_folder_2 = 'C:/Users/huadi/JINSHAN/MCU/RTC/扫温测试/dfi_TEMP_1109/2'
+    source_folder = 'C:/Users/huadi/JINSHAN/MCU/RTC/扫温测试/dfi_TEMP_1115'
+    destination_folder_1 = 'C:/Users/huadi/JINSHAN/MCU/RTC/扫温测试/dfi_TEMP_1115/1'
+    destination_folder_2 = 'C:/Users/huadi/JINSHAN/MCU/RTC/扫温测试/dfi_TEMP_1115/2'
     keyword = '(1)'
 
     classify_files_by_keyword(source_folder, destination_folder_1, destination_folder_2, keyword)
